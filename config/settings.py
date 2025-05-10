@@ -1,13 +1,18 @@
 from pydantic_settings import BaseSettings
+from dotenv import load_dotenv
+import os
+
+# Cargar variables de entorno desde .env
+load_dotenv()
 
 class Settings(BaseSettings):
-    APP_NAME: str = "API Roto"
+    APP_NAME: str = os.getenv("APP_NAME", "API Roto")
     #DEBUG: bool = True
-    API_V1_STR: str = "/api/v1"
+    API_V1_STR: str = os.getenv("API_V1_STR", "/api/v1")
     
     # Configuración de la base de datos
-    DATABASE_URL: str = "mongodb+srv://gustavomaparicio:admin3219$0@cluster0.dw8dn0c.mongodb.net/?retryWrites=true&w=majority"
-    DATABASE_NAME: str = "kits_db"
+    DATABASE_URL: str = os.getenv("DATABASE_URL")
+    DATABASE_NAME: str = os.getenv("DATABASE_NAME")
 
     class Config:
         case_sensitive = True
