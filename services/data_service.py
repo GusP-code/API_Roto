@@ -351,7 +351,7 @@ class DataService:
 
             # Añadir los valores "alternative" como una opción más en options_summary
             if all_used_alternatives:
-                result["options_summary"]["alternatives"] = sorted(list(all_used_alternatives))
+                result["options_summary"]["alternative"] = sorted(list(all_used_alternatives))
                 
             # Añadir los valores de colores como una opción más en options_summary
             if all_used_colors:
