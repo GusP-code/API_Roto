@@ -28,4 +28,10 @@ var/
 .idea/
 .vscode/
 *.swp
-*.swo 
+*.swo
+
+# Ignorar archivos Markdown que contengan 'Markdown' en el nombre
+*Markdown*.md
+
+# Ignorar archivos .pem
+*.pem 
