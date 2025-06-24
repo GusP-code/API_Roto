@@ -13,7 +13,7 @@ load_dotenv(dotenv_path=env_path)
 
 class Settings(BaseSettings):
     APP_NAME: str = "API Roto"
-    API_V1_STR: str = "/api/v1"
+    API_V1_STR: str = "/api/v2"
     
     # Configuración de la base de datos
     DATABASE_URL: Optional[str] = None
