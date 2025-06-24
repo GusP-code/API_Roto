@@ -1,6 +1,6 @@
 # API Roto
 
-Esta es una API desarrollada con FastAPI que interactúa con una base de datos MongoDB para consultar información sobre conjuntos ("sets") de herrajes y sus componentes, probablemente para sistemas de ventanas o puertas.
+Esta es una API desarrollada con FastAPI que interactúa con una base de datos MongoDB para consultar información sobre conjuntos ("sets") de herrajes y sus componentes para sistemas de ventanas y puertas.
 
 La API permite listar los conjuntos disponibles y obtener datos detallados de un conjunto específico, calculando los componentes aplicables según dimensiones proporcionadas.
 
