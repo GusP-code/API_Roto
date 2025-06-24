@@ -57,8 +57,18 @@ class Fitting(BaseModel):
 
 class ResponseModel(BaseModel):
     set_id: str
+    set_code: Optional[str] = None
     width: int
     height: int
     applicable_fittings: List[Fitting]
     options_summary: Dict[str, List[str]] 
     total_fittings: int
+
+class SetModel(BaseModel):
+    _id: str
+    name: Optional[str] = None
+    minWidth: Optional[int] = None
+    maxWidth: Optional[int] = None
+    minHeight: Optional[int] = None
+    maxHeight: Optional[int] = None
+    

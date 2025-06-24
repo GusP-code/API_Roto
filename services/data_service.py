@@ -21,6 +21,17 @@ class DataService:
                 include_schraube=include_schraube
             )
 
+            # Consultar el set_code desde sets_collection
+            client = MongoClient(connection_string)
+            try:
+                db = client[db_name]
+                sets_collection = db["sets_collection"]
+                set_doc = sets_collection.find_one({"_id": set_id})
+                set_code = set_doc.get("set_code") if set_doc else None
+                result["set_code"] = set_code
+            finally:
+                client.close()
+
             # Verificar si hay errores
             if "error" in result:
                 raise Exception(result["error"])
@@ -362,5 +373,30 @@ class DataService:
         except Exception as e:
             print(f"Error en find_fittings_for_set: {str(e)}")
             raise Exception(f"Error al procesar los datos: {str(e)}")
+        finally:
+            client.close()
+
+    @staticmethod
+    def list_sets():
+        connection_string = settings.DATABASE_URL
+        db_name = settings.DATABASE_NAME
+        client = MongoClient(connection_string)
+        try:
+            db = client[db_name]
+            sets_collection = db["sets_collection"]
+            sets = list(sets_collection.find())
+            # Convertir ObjectId a str
+            for s in sets:
+                s["_id"] = str(s["_id"])
+                # Asignar 'set_code' a 'name' si existe
+                if "set_code" in s:
+                    s["name"] = s["set_code"]
+                # Eliminar el campo 'kits' si existe
+                if "kits" in s:
+                    del s["kits"]
+            return sets
+        except Exception as e:
+            print(f"Error al listar sets: {str(e)}")
+            raise Exception(f"Error al consultar MongoDB: {str(e)}")
         finally:
             client.close()

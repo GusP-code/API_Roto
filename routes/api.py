@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException, Query
 from config.settings import settings
 from services.data_service import DataService
-from models.data_model import ResponseModel
+from models.data_model import ResponseModel, SetModel
 
 router = APIRouter(prefix=settings.API_V1_STR)
 
@@ -15,5 +15,12 @@ async def get_complete_data(
 ):
     try:
         return DataService.get_complete_data(set_id, width, height, include_schraube)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@router.get("/sets", response_model=list[SetModel])
+async def list_sets():
+    try:
+        return DataService.list_sets()
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
